@@ -14,13 +14,13 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp">
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/profile_general_info_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:name="com.template.technocratia.presentation.ProfileGeneralInfo"/>
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/profile_additional_info_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

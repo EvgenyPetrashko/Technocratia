@@ -9,12 +9,18 @@ class GetUserUseCase @Inject constructor(private val repository: ProfileReposito
     suspend fun execute(): User{
         val profile = repository.getProfileFromServer().results[0]
         return User(
-            photo = profile.picture.medium,
+            photo = profile.picture.large,
             fullName = profile.name.toString(),
-            dateOfBirth = profile.dob.toString(),
+            dateOfBirth = fromIsoToNormDate(profile.dob.toString()),
             phoneNumber = profile.phone,
             location = profile.location.toString(),
             coordinates = profile.location.coordinates.toString()
         )
+    }
+
+    private fun fromIsoToNormDate(isoDate: String): String{
+        val parts = isoDate.split("-", "T")
+        print(parts)
+        return "${parts[2]}.${parts[1]}.${parts[0]}"
     }
 }
