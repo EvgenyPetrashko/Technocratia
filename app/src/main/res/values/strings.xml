@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Technocratia</string>
+    <string name="save_profile">Save</string>
+    <string name="userProfileFullNameExample">Evgeny Petrashko</string>
+    <string name="userDateBirthExample">06.10.2000</string>
+    <string name="userProfileAdditionalInfoTitle">Additional Info</string>
+    <string name="userProfileAdditionalInfoPhoneTitle">Phone:</string>
+    <string name="userProfileAdditionalInfoPhoneExample">89003241851</string>
+    <string name="userProfileAdditionalInfoLocationTitle">Location:</string>
+    <string name="userProfileAdditionalInfoLocationExample">st. Nazli, Kazan city, Russia</string>
+    <string name="userProfileAdditionalInfoCoordinatesTitle">Coordinates:</string>
+    <string name="userProfileAdditionalInfoCoordinatesExample">13.4614, -158.1958</string>
 </resources>
