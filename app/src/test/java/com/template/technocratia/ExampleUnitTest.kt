@@ -19,17 +19,4 @@ class ExampleUnitTest {
         assertEquals(4, 2 + 2)
     }
 
-    @Test
-    fun network_call(): Unit = runBlocking{
-        val module = NetworkModule()
-        val api = module.provideApi(module.provideRetrofitInstance())
-        val profile = api.getProfile()
-        print(profile)
-    }
-
-    @Test
-    fun check_network_architecture(): Unit = runBlocking {
-        val user = GetUserUseCase(ProfileRepositoryImp(NetworkModule())).execute()
-        print(user.photo)
-    }
 }

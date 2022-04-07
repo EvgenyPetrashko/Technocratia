@@ -2,8 +2,9 @@ package com.template.technocratia.domain.usecase
 
 import com.template.technocratia.domain.entities.User
 import com.template.technocratia.domain.repository.ProfileRepository
+import javax.inject.Inject
 
-class GetUserUseCase(private val repository: ProfileRepository) {
+class GetUserUseCase @Inject constructor(private val repository: ProfileRepository) {
 
     suspend fun execute(): User{
         val profile = repository.getProfileFromServer().results[0]
