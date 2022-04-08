@@ -6,18 +6,31 @@ import androidx.lifecycle.viewModelScope
 import com.template.technocratia.domain.entities.User
 import com.template.technocratia.domain.usecase.GetUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class UserViewModel @Inject constructor(
     private val getUserUseCase: GetUserUseCase
-): ViewModel() {
+) : ViewModel() {
     val users = MutableLiveData<User>()
+    val errors = MutableLiveData<String>()
+    val loadingState = MutableLiveData(false)
 
-    fun refreshUser(){
+    fun refreshUser() {
         viewModelScope.launch {
-            users.postValue(getUserUseCase.execute())
+            withContext(Dispatchers.IO) {
+                loadingState.postValue(true)
+                val observable = getUserUseCase.execute()
+                observable.doOnError {
+                    errors.postValue("Error")
+                }.subscribe {
+                    users.postValue(it)
+                    loadingState.postValue(false)
+                }
+            }
         }
     }
 

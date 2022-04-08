@@ -1,7 +1,8 @@
 package com.template.technocratia.domain.repository
 
 import com.template.technocratia.data.network.entities.Profile
+import io.reactivex.Observable
 
 interface ProfileRepository {
-    suspend fun getProfileFromServer(): Profile
+    fun getProfileFromServer(): Observable<Profile>
 }
