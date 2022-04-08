@@ -5,9 +5,9 @@ import com.template.technocratia.domain.repository.ProfileRepository
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class GetUserUseCase @Inject constructor(private val repository: ProfileRepository) {
+class GetUserFromServerUseCase @Inject constructor(private val repository: ProfileRepository) {
 
-    fun execute(): Observable<User> {
+    fun getUserFromServer(): Observable<User> {
         return repository.getProfileFromServer().flatMap {
             val profile = it.results[0]
             Observable.just(

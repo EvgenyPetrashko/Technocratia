@@ -1,4 +1,4 @@
-package com.template.technocratia.presentation
+package com.template.technocratia.presentation.fragments
 
 import android.content.Intent
 import android.net.Uri
@@ -11,15 +11,16 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.template.technocratia.R
+import com.template.technocratia.presentation.viewmodels.MainActivityViewModel
 
 
-class ProfileAdditionalInfo: Fragment() {
+class ProfileAdditionalInfo : Fragment() {
     private lateinit var userPhoneNumber: TextView
     private lateinit var userLocation: TextView
     private lateinit var userCoordinates: TextView
     private lateinit var userDialBtn: ImageButton
     private lateinit var userMapBtn: ImageButton
-    private val userViewModel: UserViewModel by activityViewModels()
+    private val mainActivityViewModel: MainActivityViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,16 +32,16 @@ class ProfileAdditionalInfo: Fragment() {
         userCoordinates = view.findViewById(R.id.profileCoordinates)
 
         userDialBtn = view.findViewById(R.id.profileCallBtn)
-        userDialBtn.setOnClickListener{
+        userDialBtn.setOnClickListener {
             dialPhoneNumber()
         }
 
         userMapBtn = view.findViewById(R.id.profileMapBtn)
-        userMapBtn.setOnClickListener{
+        userMapBtn.setOnClickListener {
             showMap()
         }
 
-        userViewModel.users.observe(viewLifecycleOwner) {
+        mainActivityViewModel.users.observe(viewLifecycleOwner) {
             userPhoneNumber.text = it.phoneNumber
             userLocation.text = it.location
             userCoordinates.text = it.coordinates
@@ -50,17 +51,17 @@ class ProfileAdditionalInfo: Fragment() {
     }
 
     private fun dialPhoneNumber() {
-        val phoneNumber = userViewModel.users.value?.phoneNumber
-        if (phoneNumber != null){
+        val phoneNumber = mainActivityViewModel.users.value?.phoneNumber
+        if (phoneNumber != null) {
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data = Uri.parse("tel:${phoneNumber}")
             startActivity(intent)
         }
     }
 
-    private fun showMap(){
-        val coordinates = userViewModel.users.value?.coordinates
-        if (coordinates != null){
+    private fun showMap() {
+        val coordinates = mainActivityViewModel.users.value?.coordinates
+        if (coordinates != null) {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse("geo:$coordinates")
             startActivity(intent)

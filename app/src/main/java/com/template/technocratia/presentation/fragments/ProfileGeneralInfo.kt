@@ -1,4 +1,4 @@
-package com.template.technocratia.presentation
+package com.template.technocratia.presentation.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.template.technocratia.R
+import com.template.technocratia.presentation.viewmodels.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,7 +18,7 @@ class ProfileGeneralInfo : Fragment() {
     private lateinit var userFullName: TextView
     private lateinit var userDateBirth: TextView
     private lateinit var userImgProfile: ImageView
-    private val userViewModel: UserViewModel by activityViewModels()
+    private val mainActivityViewModel: MainActivityViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,7 +28,7 @@ class ProfileGeneralInfo : Fragment() {
         userFullName = view.findViewById(R.id.profileFullName)
         userDateBirth = view.findViewById(R.id.profileDateBirth)
         userImgProfile = view.findViewById(R.id.profileImg)
-        userViewModel.users.observe(viewLifecycleOwner) {
+        mainActivityViewModel.users.observe(viewLifecycleOwner) {
             userFullName.text = it.fullName
             userDateBirth.text = it.dateOfBirth
             Glide.with(this)
