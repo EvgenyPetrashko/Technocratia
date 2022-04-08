@@ -24,12 +24,12 @@ class UserViewModel @Inject constructor(
             withContext(Dispatchers.IO) {
                 loadingState.postValue(true)
                 val observable = getUserUseCase.execute()
-                observable.doOnError {
-                    errors.postValue("Error")
-                }.subscribe {
-                    users.postValue(it)
+                observable.doOnTerminate {
                     loadingState.postValue(false)
-                }
+                }.subscribe(
+                    { users.postValue(it) },
+                    { errors.postValue("Error! Please try Again Later") }
+                )
             }
         }
     }
