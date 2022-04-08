@@ -1,6 +1,12 @@
 package com.template.technocratia.domain.entities
 
-data class User(
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class UserDB(
+    @PrimaryKey(autoGenerate = true)
+    val uid: Int = 0,
     override val photo: String,
     override val fullName: String,
     override val dateOfBirth: String,
