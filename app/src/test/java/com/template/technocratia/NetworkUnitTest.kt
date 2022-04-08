@@ -3,7 +3,7 @@ package com.template.technocratia
 import com.template.technocratia.data.network.NetworkModule
 import com.template.technocratia.data.repository.ProfileRepositoryImp
 import com.template.technocratia.domain.entities.User
-import com.template.technocratia.domain.usecase.GetUserUseCase
+import com.template.technocratia.domain.usecase.GetUserFromServerUseCase
 import io.reactivex.observers.TestObserver
 import org.junit.Test
 
@@ -17,7 +17,7 @@ import org.junit.Before
  */
 class NetworkUnitTest {
 
-    private lateinit var getUserUseCase: GetUserUseCase
+    private lateinit var getUserFromServerUseCase: GetUserFromServerUseCase
 
 
     @Before
@@ -27,12 +27,12 @@ class NetworkUnitTest {
         val retrofitInst = networkModule.provideRetrofitInstance(clientInst)
         val apiInst = networkModule.provideApi(retrofitInst)
         val profileRepositoryImp = ProfileRepositoryImp(apiInst)
-        getUserUseCase = GetUserUseCase(profileRepositoryImp)
+        getUserFromServerUseCase = GetUserFromServerUseCase(profileRepositoryImp)
     }
 
     @Test
     fun test() {
-        val testObservable = getUserUseCase.execute()
+        val testObservable = getUserFromServerUseCase.getUserFromServer()
         val testObserver = TestObserver<User>()
         testObservable.subscribe(testObserver)
         testObserver.assertComplete()
