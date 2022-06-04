@@ -26,5 +26,86 @@
         android:layout_height="wrap_content"
         android:text="@string/userDateBirthExample" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="2dp"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/userProfileAdditionalInfoTitle"
+            android:textSize="24sp"
+            android:textStyle="italic|bold" />
+
+        <TextView
+            style="@style/additionalInfoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userProfileAdditionalInfoPhoneTitle" />
+
+        <TextView
+            android:id="@+id/profilePhone"
+            style="@style/additionalInfoValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userProfileAdditionalInfoPhoneExample" />
+
+        <TextView
+            style="@style/additionalInfoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userProfileAdditionalInfoLocationTitle" />
+
+        <TextView
+            android:id="@+id/profileLocation"
+            style="@style/additionalInfoValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userProfileAdditionalInfoLocationExample" />
+
+        <TextView
+            style="@style/additionalInfoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userProfileAdditionalInfoCoordinatesTitle" />
+
+        <TextView
+            android:id="@+id/profileCoordinates"
+            style="@style/additionalInfoValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userProfileAdditionalInfoCoordinatesExample" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <ImageButton
+                android:id="@+id/profileCallBtn"
+                style="@style/additionalInfoBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/call_btn"
+                android:src="@drawable/icon_call_white_24" />
+
+            <ImageButton
+                android:id="@+id/profileMapBtn"
+                style="@style/additionalInfoBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/map_btn"
+                android:src="@drawable/icon_map_white_24" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 </LinearLayout>
