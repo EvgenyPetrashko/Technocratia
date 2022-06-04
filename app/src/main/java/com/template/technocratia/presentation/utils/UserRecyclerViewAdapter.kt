@@ -8,9 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.template.technocratia.R
-import com.template.technocratia.domain.entities.User
+import com.template.technocratia.domain.entities.UserStored
 
-class UserRecyclerViewAdapter(private val users: List<User> = listOf()) :
+class UserRecyclerViewAdapter(private val users: List<UserStored> = listOf()) :
     RecyclerView.Adapter<UserRecyclerViewAdapter.MyViewHolder>() {
 
 
