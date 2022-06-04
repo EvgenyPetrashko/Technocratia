@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class SaveUserToDatabaseUseCase @Inject constructor(private val userRepositoryDB: UserRepositoryDB) {
 
-    fun saveUserToDatabase(user: User) {
+    suspend fun saveUserToDatabase(user: User) {
         userRepositoryDB.saveUserToDB(user.toUserDB())
     }
 

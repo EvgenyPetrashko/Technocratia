@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class GetUsersFromDatabaseUseCase @Inject constructor(private val userRepositoryDb: UserRepositoryDB) {
 
-    fun getUsersFromDB(): List<User> {
+    suspend fun getUsersFromDB(): List<User> {
         return userRepositoryDb.getUserFromDB().map {
             it.toUser()
         }

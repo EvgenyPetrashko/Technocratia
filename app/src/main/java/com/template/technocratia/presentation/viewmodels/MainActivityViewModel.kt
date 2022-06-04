@@ -7,9 +7,7 @@ import com.template.technocratia.domain.entities.User
 import com.template.technocratia.domain.usecase.GetUserFromServerUseCase
 import com.template.technocratia.domain.usecase.SaveUserToDatabaseUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,17 +22,11 @@ class MainActivityViewModel @Inject constructor(
 
     fun refreshUser() {
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                loadingState.postValue(true)
-                val observable = getUserFromServerUseCase.getUserFromServer()
-                observable.doOnTerminate {
-                    loadingState.postValue(false)
-                    savedState.postValue(false)
-                }.subscribe(
-                    { users.postValue(it) },
-                    { errors.postValue("Error! Please try Again Later") }
-                )
-            }
+            loadingState.postValue(true)
+            val user = getUserFromServerUseCase.getUserFromServer()
+            loadingState.postValue(false)
+            savedState.postValue(false)
+            users.postValue(user)
         }
     }
 
@@ -42,10 +34,8 @@ class MainActivityViewModel @Inject constructor(
         viewModelScope.launch {
             val user = users.value
             if (user != null) {
-                withContext(Dispatchers.IO) {
-                    savedState.postValue(true)
-                    saveUserToDatabaseUseCase.saveUserToDatabase(user)
-                }
+                savedState.postValue(true)
+                saveUserToDatabaseUseCase.saveUserToDatabase(user)
             }
         }
     }

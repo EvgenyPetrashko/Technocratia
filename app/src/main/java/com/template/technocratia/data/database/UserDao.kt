@@ -8,8 +8,8 @@ import com.template.technocratia.domain.entities.UserDB
 @Dao
 interface UserDao {
     @Query("SELECT * FROM UserDB")
-    fun getAll(): List<UserDB>
+    suspend fun getAll(): List<UserDB>
 
     @Insert
-    fun insert(user: UserDB)
+    suspend fun insert(user: UserDB)
 }

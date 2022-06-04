@@ -6,11 +6,11 @@ import com.template.technocratia.domain.repository.UserRepositoryDB
 import javax.inject.Inject
 
 class UserRepositoryDbImp @Inject constructor(private val userDao: UserDao) : UserRepositoryDB {
-    override fun getUserFromDB(): List<UserDB> {
+    override suspend fun getUserFromDB(): List<UserDB> {
         return userDao.getAll()
     }
 
-    override fun saveUserToDB(user: UserDB) {
+    override suspend fun saveUserToDB(user: UserDB) {
         userDao.insert(user)
     }
 
