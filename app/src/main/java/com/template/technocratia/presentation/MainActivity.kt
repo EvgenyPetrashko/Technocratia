@@ -1,4 +1,4 @@
-package com.template.technocratia.presentation.activities
+package com.template.technocratia.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
