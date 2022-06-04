@@ -1,5 +1,6 @@
 package com.template.technocratia.presentation.viewmodels
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -33,13 +34,20 @@ class MainActivityViewModel @Inject constructor(
     val savedState: LiveData<Boolean>
         get() = savedStateMutable
 
+    @SuppressLint("NullSafeMutableLiveData")
     fun refreshUser() {
         viewModelScope.launch {
             loadingStateMutable.postValue(true)
-            val user = getUserFromServerUseCase.getUserFromServer()
+            savedStateMutable.postValue(true)
+            val userWrapper = getUserFromServerUseCase.getUserFromServer()
+            val incomingError = userWrapper.error
+            if (incomingError != null) {
+                errorsMutable.value = incomingError
+            } else {
+                usersMutable.postValue(userWrapper.data)
+                savedStateMutable.postValue(false)
+            }
             loadingStateMutable.postValue(false)
-            savedStateMutable.postValue(false)
-            usersMutable.postValue(user)
         }
     }
 
