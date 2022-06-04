@@ -1,5 +1,6 @@
 package com.template.technocratia.presentation.viewmodels
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,18 +16,30 @@ class MainActivityViewModel @Inject constructor(
     private val getUserFromServerUseCase: GetUserFromServerUseCase,
     private val saveUserToDatabaseUseCase: SaveUserToDatabaseUseCase
 ) : ViewModel() {
-    val users = MutableLiveData<User>()
-    val errors = MutableLiveData<String>()
-    val loadingState = MutableLiveData(false)
-    val savedState = MutableLiveData(false)
+    private val usersMutable = MutableLiveData<User>()
+    private val errorsMutable = MutableLiveData<String>()
+    private val loadingStateMutable = MutableLiveData(false)
+    private val savedStateMutable = MutableLiveData(false)
+
+    val users: LiveData<User>
+        get() = usersMutable
+
+    val errors: LiveData<String>
+        get() = errorsMutable
+
+    val loadingState: LiveData<Boolean>
+        get() = loadingStateMutable
+
+    val savedState: LiveData<Boolean>
+        get() = savedStateMutable
 
     fun refreshUser() {
         viewModelScope.launch {
-            loadingState.postValue(true)
+            loadingStateMutable.postValue(true)
             val user = getUserFromServerUseCase.getUserFromServer()
-            loadingState.postValue(false)
-            savedState.postValue(false)
-            users.postValue(user)
+            loadingStateMutable.postValue(false)
+            savedStateMutable.postValue(false)
+            usersMutable.postValue(user)
         }
     }
 
@@ -34,7 +47,7 @@ class MainActivityViewModel @Inject constructor(
         viewModelScope.launch {
             val user = users.value
             if (user != null) {
-                savedState.postValue(true)
+                savedStateMutable.postValue(true)
                 saveUserToDatabaseUseCase.saveUserToDatabase(user)
             }
         }
